@@ -32,8 +32,10 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.userControl11 = new GrafikaZadania.UserControl1();
+            this.userControl21 = new GrafikaZadania.UserControl2();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -60,6 +62,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.userControl21);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -76,6 +79,13 @@
             this.userControl11.Size = new System.Drawing.Size(770, 529);
             this.userControl11.TabIndex = 0;
             // 
+            // userControl21
+            // 
+            this.userControl21.Location = new System.Drawing.Point(0, 0);
+            this.userControl21.Name = "userControl21";
+            this.userControl21.Size = new System.Drawing.Size(770, 529);
+            this.userControl21.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -86,6 +96,7 @@
             this.Text = "Form1";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -96,6 +107,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private UserControl1 userControl11;
+        private UserControl2 userControl21;
     }
 }
 
