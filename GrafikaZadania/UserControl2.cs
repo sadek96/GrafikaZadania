@@ -46,8 +46,8 @@ namespace GrafikaZadania
                 displayedBitmap = null;
                 fileStream = new FileStream(openFileDialog1.FileName, FileMode.Open);
                 
-                //try
-               // {
+                try
+                {
                     switch (ext)
                     {
                         case ".ppm":
@@ -59,12 +59,12 @@ namespace GrafikaZadania
                             break;
                         default: MessageBox.Show("Błąd", " Nie wspierane rozszerzenie pliku! " + ext); break;
                     }
-                //}
-                //catch(Exception ex)
-                //{
-                    //string msg = ex.Message;
-                    //MessageBox.Show(msg,"Błąd wczytywania pliku");
-                //}
+                }
+                catch(Exception ex)
+                {
+                    string msg = ex.Message;
+                    MessageBox.Show(msg,"Błąd wczytywania pliku");
+                }
 
                 picBox.Image = displayedBitmap;
             }
