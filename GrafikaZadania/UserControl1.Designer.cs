@@ -29,21 +29,16 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.lineButton = new System.Windows.Forms.Button();
-            this.rectangleButton = new System.Windows.Forms.Button();
-            this.circleButton = new System.Windows.Forms.Button();
-            this.ShapePanel = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -53,12 +48,17 @@
             this.label9 = new System.Windows.Forms.Label();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.circleButton = new System.Windows.Forms.Button();
+            this.lineButton = new System.Windows.Forms.Button();
+            this.rectangleButton = new System.Windows.Forms.Button();
+            this.ShapePanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -82,65 +82,15 @@
             this.splitContainer1.SplitterDistance = 258;
             this.splitContainer1.TabIndex = 0;
             // 
-            // lineButton
+            // button1
             // 
-            this.lineButton.Location = new System.Drawing.Point(173, 3);
-            this.lineButton.Name = "lineButton";
-            this.lineButton.Size = new System.Drawing.Size(80, 58);
-            this.lineButton.TabIndex = 2;
-            this.lineButton.Text = "Linia";
-            this.lineButton.UseVisualStyleBackColor = true;
-            this.lineButton.Click += new System.EventHandler(this.ShapeButton_Click);
-            // 
-            // rectangleButton
-            // 
-            this.rectangleButton.Location = new System.Drawing.Point(88, 3);
-            this.rectangleButton.Name = "rectangleButton";
-            this.rectangleButton.Size = new System.Drawing.Size(79, 58);
-            this.rectangleButton.TabIndex = 1;
-            this.rectangleButton.Text = "Prostokąt";
-            this.rectangleButton.UseVisualStyleBackColor = true;
-            this.rectangleButton.Click += new System.EventHandler(this.ShapeButton_Click);
-            // 
-            // circleButton
-            // 
-            this.circleButton.Location = new System.Drawing.Point(3, 3);
-            this.circleButton.Name = "circleButton";
-            this.circleButton.Size = new System.Drawing.Size(79, 58);
-            this.circleButton.TabIndex = 0;
-            this.circleButton.Text = "Okrąg";
-            this.circleButton.UseVisualStyleBackColor = true;
-            this.circleButton.Click += new System.EventHandler(this.ShapeButton_Click);
-            // 
-            // ShapePanel
-            // 
-            this.ShapePanel.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ShapePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ShapePanel.Location = new System.Drawing.Point(0, 0);
-            this.ShapePanel.Name = "ShapePanel";
-            this.ShapePanel.Size = new System.Drawing.Size(512, 533);
-            this.ShapePanel.TabIndex = 0;
-            this.ShapePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.ShapePanel_Paint);
-            this.ShapePanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ShapePanel_MouseDown);
-            this.ShapePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ShapePanel_MouseMove);
-            this.ShapePanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ShapePanel_MouseUp);
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.34F));
-            this.tableLayoutPanel1.Controls.Add(this.circleButton, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lineButton, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.rectangleButton, 1, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 469);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(256, 64);
-            this.tableLayoutPanel1.TabIndex = 3;
+            this.button1.Location = new System.Drawing.Point(3, 425);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(253, 41);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Zatwierdź";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -196,30 +146,6 @@
             this.textBox2.Size = new System.Drawing.Size(122, 20);
             this.textBox2.TabIndex = 1;
             // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(131, 53);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(122, 20);
-            this.textBox3.TabIndex = 2;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(131, 79);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(122, 20);
-            this.textBox4.TabIndex = 3;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(3, 425);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(253, 41);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Zatwierdź";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -247,6 +173,13 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Szerokość";
             // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(131, 53);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(122, 20);
+            this.textBox3.TabIndex = 2;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -255,6 +188,13 @@
             this.label4.Size = new System.Drawing.Size(57, 13);
             this.label4.TabIndex = 7;
             this.label4.Text = "Wysokość";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(131, 79);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(122, 20);
+            this.textBox4.TabIndex = 3;
             // 
             // label5
             // 
@@ -331,6 +271,66 @@
             this.textBox8.Size = new System.Drawing.Size(122, 20);
             this.textBox8.TabIndex = 16;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.34F));
+            this.tableLayoutPanel1.Controls.Add(this.circleButton, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lineButton, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.rectangleButton, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 469);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(256, 64);
+            this.tableLayoutPanel1.TabIndex = 3;
+            // 
+            // circleButton
+            // 
+            this.circleButton.Location = new System.Drawing.Point(3, 3);
+            this.circleButton.Name = "circleButton";
+            this.circleButton.Size = new System.Drawing.Size(79, 58);
+            this.circleButton.TabIndex = 0;
+            this.circleButton.Text = "Okrąg";
+            this.circleButton.UseVisualStyleBackColor = true;
+            this.circleButton.Click += new System.EventHandler(this.ShapeButton_Click);
+            // 
+            // lineButton
+            // 
+            this.lineButton.Location = new System.Drawing.Point(173, 3);
+            this.lineButton.Name = "lineButton";
+            this.lineButton.Size = new System.Drawing.Size(80, 58);
+            this.lineButton.TabIndex = 2;
+            this.lineButton.Text = "Linia";
+            this.lineButton.UseVisualStyleBackColor = true;
+            this.lineButton.Click += new System.EventHandler(this.ShapeButton_Click);
+            // 
+            // rectangleButton
+            // 
+            this.rectangleButton.Location = new System.Drawing.Point(88, 3);
+            this.rectangleButton.Name = "rectangleButton";
+            this.rectangleButton.Size = new System.Drawing.Size(79, 58);
+            this.rectangleButton.TabIndex = 1;
+            this.rectangleButton.Text = "Prostokąt";
+            this.rectangleButton.UseVisualStyleBackColor = true;
+            this.rectangleButton.Click += new System.EventHandler(this.ShapeButton_Click);
+            // 
+            // ShapePanel
+            // 
+            this.ShapePanel.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ShapePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ShapePanel.Location = new System.Drawing.Point(0, 0);
+            this.ShapePanel.Name = "ShapePanel";
+            this.ShapePanel.Size = new System.Drawing.Size(512, 533);
+            this.ShapePanel.TabIndex = 0;
+            this.ShapePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.ShapePanel_Paint);
+            this.ShapePanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ShapePanel_MouseDown);
+            this.ShapePanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ShapePanel_MouseMove);
+            this.ShapePanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ShapePanel_MouseUp);
+            // 
             // UserControl1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -343,9 +343,9 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

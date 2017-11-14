@@ -31,17 +31,25 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.userControl11 = new GrafikaZadania.UserControl1();
             this.userControl21 = new GrafikaZadania.UserControl2();
+            this.userControl31 = new GrafikaZadania.UserControl3();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -71,6 +79,34 @@
             this.tabPage2.Text = "Zadanie 2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.userControl31);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(776, 535);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Zadanie 3";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(776, 535);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Zadanie 4";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(776, 535);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Zadanie 5";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
             // userControl11
             // 
             this.userControl11.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -81,10 +117,19 @@
             // 
             // userControl21
             // 
-            this.userControl21.Location = new System.Drawing.Point(0, 0);
+            this.userControl21.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControl21.Location = new System.Drawing.Point(3, 3);
             this.userControl21.Name = "userControl21";
+            this.userControl21.Padding = new System.Windows.Forms.Padding(10);
             this.userControl21.Size = new System.Drawing.Size(770, 529);
             this.userControl21.TabIndex = 0;
+            // 
+            // userControl31
+            // 
+            this.userControl31.Location = new System.Drawing.Point(0, 0);
+            this.userControl31.Name = "userControl31";
+            this.userControl31.Size = new System.Drawing.Size(150, 150);
+            this.userControl31.TabIndex = 0;
             // 
             // Form1
             // 
@@ -97,6 +142,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -108,6 +154,10 @@
         private System.Windows.Forms.TabPage tabPage2;
         private UserControl1 userControl11;
         private UserControl2 userControl21;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPage5;
+        private UserControl3 userControl31;
     }
 }
 

@@ -93,17 +93,9 @@ namespace PixelMap
         }
 
         /// <summary>
-        /// A 24bpp Grey map (really only 8bpp of information, since R,G,B bytes are identical) created from the PixelMap.
-        /// </summary>
-        public Bitmap GreyMap
-        {
-            get { return CreateGreyMap(); }
-        }
-
-        /// <summary>
         /// File-based constructor.
         /// </summary>
-        /// <param name="filename">The name of the .pbm, .pbm, or .ppm file.</param>
+        /// <param name="filename">The name of the .ppm file.</param>
         public PixelMap(string filename)
         {
             if (File.Exists(filename))
@@ -122,10 +114,11 @@ namespace PixelMap
         /// Stream-based constructor. Typically, the stream will be a FileStream, but it may also be a MemoryStream
         /// or other object derived from the Stream class.
         /// </summary>
-        /// <param name="stream">A stream containing the header and data portions of the .pbm, .pgm, or .ppm image.</param>
+        /// <param name="stream">A stream containing the header and data portions of the .ppm image.</param>
         public PixelMap(Stream stream)
         {
             this.FromStream(stream);
+            stream.Close();
         }
 
         private void FromStream(Stream stream)
@@ -133,7 +126,9 @@ namespace PixelMap
             int index;
             this.header = new PixelMapHeader();
             int headerItemCount = 0;
+            
             BinaryReader binReader = new BinaryReader(stream);
+            
             try
             {
                 //1. Read the Header.
@@ -167,16 +162,8 @@ namespace PixelMap
                                 headerItemCount++;
                                 break;
                             case 3: // next item is the depth.
-                                if (this.header.MagicNumber == "P1" | this.header.MagicNumber == "P4")
-                                {
-                                    // no depth value for PBM type.
-                                    headerItemCount++;
-                                }
-                                else
-                                {
-                                    this.header.Depth = ReadValue(binReader);
-                                    headerItemCount++;
-                                }
+                                this.header.Depth = ReadValue(binReader);
+                                headerItemCount++;
                                 break;
                             default:
                                 throw new Exception("Error parsing the file header.");
@@ -188,23 +175,10 @@ namespace PixelMap
                 // 2.1 Size the imageData array to hold the image bytes.
                 switch (this.header.MagicNumber)
                 {
-                    case "P1": // 1 byte per pixel
-                        this.pixelFormat = PixelFormat.Format8bppIndexed;
-                        this.bytesPerPixel = 1;
-                        break;
-                    case "P2": // 1 byte per pixel
-                        this.pixelFormat = PixelFormat.Format8bppIndexed;
-                        this.bytesPerPixel = 1;
-                        break;
+
                     case "P3": // 3 bytes per pixel
                         this.pixelFormat = PixelFormat.Format24bppRgb;
                         this.bytesPerPixel = 3;
-                        break;
-                    case "P4":
-                        throw new Exception("Binary .pbm (Magic Number P4) is not supported at this time.");
-                    case "P5":  // 1 byte per pixel
-                        this.pixelFormat = PixelFormat.Format8bppIndexed;
-                        this.bytesPerPixel = 1;
                         break;
                     case "P6":  // 3 bytes per pixel
                         this.pixelFormat = PixelFormat.Format24bppRgb;
@@ -219,7 +193,7 @@ namespace PixelMap
                 //{
                 //    this.stride++;
                 //}
-                if (this.header.MagicNumber == "P1" | this.header.MagicNumber == "P2" | this.header.MagicNumber == "P3") // ASCII Encoding
+                if (this.header.MagicNumber == "P3") // ASCII Encoding
                 {
                     int charsLeft = (int)(binReader.BaseStream.Length - binReader.BaseStream.Position);
                     char[] charData = binReader.ReadChars(charsLeft);   // read all the data into an array in one go, for efficiency.
@@ -252,11 +226,11 @@ namespace PixelMap
                 ReorderBGRtoRGB();
 
                 // 4. Create the BitMap
-                if (this.stride % 4 == 0)
-                {
-                    this.bitmap = CreateBitMap();
-                }
-                else
+                //if (this.stride % 4 == 0)
+                //{
+                //    this.bitmap = CreateBitMap();
+                //}
+                //else
                 {
                     this.bitmap = CreateBitmapOffSize();
                 }
@@ -282,10 +256,6 @@ namespace PixelMap
             }
         }
 
-        /// <summary>
-        /// As it stands, the native byte order in .pbm, .pgm, and .ppm images is BGR.  We need to reverse the order
-        /// into RGB as this is what is needed for 24bppRGB  bitmap pixel format on Windows.
-        /// </summary>
         private void ReorderBGRtoRGB()
         {
             byte[] tempData = new byte[this.imageData.Length];
@@ -315,61 +285,6 @@ namespace PixelMap
             return bitmap;
         }
 
-        private Bitmap CreateGreyMap()
-        {
-            byte[] greyData = new byte[this.header.Width * this.header.Height * 3];
-            int stride = this.header.Width * 3;
-            //while (stride % 4 != 0)
-            //{
-            //    stride++;
-            //}
-            if (stride % 4 != 0)
-            {
-                return CreateGreyMapOffSize(greyData);
-            }
-            byte grey;
-            switch (this.pixelFormat)
-            {
-                case PixelFormat.Format24bppRgb:
-                    int red, green, blue;
-                    for (int i = 0; i < this.imageData.Length; i = i + 3)
-                    {
-                        red = (int)this.imageData[i];
-                        green = (int)this.imageData[i + 1];
-                        blue = (int)this.imageData[i + 2];
-                        grey = (byte)((red + green + blue) / 3);
-                        greyData[i] = grey;
-                        greyData[i + 1] = grey;
-                        greyData[i + 2] = grey;
-                    }
-                    break;
-                case PixelFormat.Format8bppIndexed:
-                    int index = 0;
-                    for (int i = 0; i < this.imageData.Length; i++)
-                    {
-                        index = 3 * i;
-                        grey = this.imageData[i];
-                        if (this.header.MagicNumber == "P1")
-                        {
-                            if ((int)grey == 1)
-                            {
-                                grey = (byte)255;
-                            }
-                        }
-                        greyData[index] = grey;
-                        greyData[index + 1] = grey;
-                        greyData[index + 2] = grey;
-                    }
-                    break;
-                default:
-                    throw new Exception("Unsupported Pixel Format: " + this.pixelFormat.ToString());
-            }
-            IntPtr pGreyData = Marshal.AllocHGlobal(greyData.Length);
-            Marshal.Copy(greyData, 0, pGreyData, greyData.Length);
-            Bitmap bitmap = new Bitmap(this.header.Width, this.header.Height, stride, PixelFormat.Format24bppRgb, pGreyData);
-            bitmap.RotateFlip(RotateFlipType.Rotate180FlipNone);
-            return bitmap;
-        }
 
         /// <summary>
         /// This method is able to handle the process of creating Bitmaps that are not sized in widths that are multiples
@@ -381,7 +296,7 @@ namespace PixelMap
         {
             Bitmap bitmap = new Bitmap(this.header.Width, this.header.Height, PixelFormat.Format24bppRgb);
             SysColor sysColor = new SysColor();
-            int red, green, blue, grey;
+            int red, green, blue;
             int index;
 
             for (int x = 0; x < this.header.Width; x++)
@@ -392,30 +307,13 @@ namespace PixelMap
 
                     switch (this.header.MagicNumber)
                     {
-                        case "P1":
-                            grey = (int)this.imageData[index];
-                            if (grey == 1)
-                            {
-                                grey = 255;
-                            }
-                            sysColor = SysColor.FromArgb(grey, grey, grey);
-                            break;
-                        case "P2":
-                            grey = (int)this.imageData[index];
-                            sysColor = SysColor.FromArgb(grey, grey, grey);
-                            break;
+
                         case "P3":
                             index = 3 * index;
                             blue = (int)this.imageData[index];
                             green = (int)this.imageData[index + 1];
                             red = (int)this.imageData[index + 2];
                             sysColor = SysColor.FromArgb(red, green, blue);
-                            break;
-                        case "P4":
-                            break;
-                        case "P5":
-                            grey = (int)this.imageData[index];
-                            sysColor = SysColor.FromArgb(grey, grey, grey);
                             break;
                         case "P6":
                             index = 3 * index;
@@ -432,68 +330,12 @@ namespace PixelMap
             }
             return bitmap;
         }
-        
-        private Bitmap CreateGreyMapOffSize(byte[] greyData)
-        {        
-            Bitmap bitmap = new Bitmap(this.header.Width, this.header.Height, PixelFormat.Format24bppRgb);
-            SysColor sysColor = new SysColor();
-            int index = 0;
-            int x = 0;
-            int y = -1;
-            switch (this.pixelFormat)
-            {
-                case PixelFormat.Format24bppRgb:
-                    int red, green, blue, grey;
-                    for (int i = 0; i < this.imageData.Length; i = i + 3)
-                    {
-                        index = i / 3;  // the current pixel
-                        if (index%this.header.Width == 0) y++;   // the current row = y;
-                        x = index - y * this.header.Width; // the current column = x;
-                        red = (int)this.imageData[i];
-                        green = (int)this.imageData[i + 1];
-                        blue = (int)this.imageData[i + 2];
-                        grey = (byte)((red + green + blue) / 3);
-                        sysColor = SysColor.FromArgb(grey, grey, grey);
-                        bitmap.SetPixel(x, y, sysColor);
-                    }
-                    break;
-                case PixelFormat.Format8bppIndexed:
-                    for (int i = 0; i < this.imageData.Length; i++)
-                    {
-                        index = i;  // the current pixel
-                        if (index % this.header.Width == 0) y++;   // the current row = y;
-                        x = index - y * this.header.Width; // the current column = x;
 
-                        grey = this.imageData[i];
-                        if (this.header.MagicNumber == "P1")
-                        {
-                            if ((int)grey == 1)
-                            {
-                                grey = (byte)255;
-                            }
-                        }
-                        sysColor = SysColor.FromArgb(grey, grey, grey);
-                        bitmap.SetPixel(x, y, sysColor);
-                    }
-                    break;
-                default:
-                    throw new Exception("Unsupported Pixel Format: " + this.pixelFormat.ToString());
-            }
-            bitmap.RotateFlip(RotateFlipType.Rotate180FlipNone);
-            return bitmap;
-        }
-
-        /// <summary>
-        /// This struct contains the objects that are found in the header of .pbm, .pgm, and .ppm files.
-        /// </summary>
         [Serializable]
         public struct PixelMapHeader
         {
             private string magicNumber;
-            /// <summary>
-            /// The "Magic Number" that identifies the type of Pixelmap. P1 = PBM (ASCII); P2 = PGM (ASCII); P3 = PPM (ASCII); P4 is not used;
-            /// P5 = PGM (Binary); P6 = PPM (Binary).
-            /// </summary>
+
             public string MagicNumber
             {
                 get { return magicNumber; }
@@ -501,9 +343,7 @@ namespace PixelMap
             }
 
             private int width;
-            /// <summary>
-            /// The width of the image.
-            /// </summary>
+
             public int Width
             {
                 get { return width; }
@@ -511,9 +351,7 @@ namespace PixelMap
             }
 
             private int height;
-            /// <summary>
-            /// The height of the image.
-            /// </summary>
+
             public int Height
             {
                 get { return height; }
@@ -521,10 +359,7 @@ namespace PixelMap
             }
 
             private int depth;
-            /// <summary>
-            /// The depth (maximum color value in each channel) of the image.  This allows the format to represent 
-            /// more than a single byte (0-255) for each color channel.
-            /// </summary>
+
             public int Depth
             {
                 get { return depth; }
