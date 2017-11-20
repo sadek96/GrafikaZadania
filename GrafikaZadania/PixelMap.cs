@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -14,6 +15,8 @@ namespace PixelMap
 
     public class PixelMap
     {
+
+        public static readonly int CHUNK_SIZE = 1024;
         private PixelMapHeader header;
 
         public PixelMapHeader Header
@@ -84,117 +87,158 @@ namespace PixelMap
             int index;
             this.header = new PixelMapHeader();
             int headerItemCount = 0;
-            
-            BinaryReader binReader = new BinaryReader(stream);
-            
-            try
+
+            using (BinaryReader binReader = new BinaryReader(stream, new ASCIIEncoding()))
             {
-                while (headerItemCount < 4)
+
+                try
                 {
-                    char nextChar = (char)binReader.PeekChar();
-                    if (nextChar == '#')  
+                    while (headerItemCount < 4)
                     {
-                        while (binReader.ReadChar() != '\n') ;
-                    }
-                    else if (Char.IsWhiteSpace(nextChar))  
-                    {
-                        binReader.ReadChar(); 
-                    }
-                    else
-                    {
-                        switch (headerItemCount)
+                        char nextChar = (char)binReader.PeekChar();
+                        if (nextChar == '#')
                         {
-                            case 0: 
-                                char[] chars = binReader.ReadChars(2);
-                                this.header.MagicNumber = chars[0].ToString() + chars[1].ToString();
-                                headerItemCount++;
-                                break;
-                            case 1: 
-                                this.header.Width = ReadValue(binReader);
-                                headerItemCount++;
-                                break;
-                            case 2: 
-                                this.header.Height = ReadValue(binReader);
-                                headerItemCount++;
-                                break;
-                            case 3: 
-                                this.header.Depth = ReadValue(binReader);
-                                headerItemCount++;
-                                break;
-                            default:
-                                throw new Exception("B³¹d parsowania pliku.");
+                            while (binReader.ReadChar() != '\n') ;
+                        }
+                        else if (Char.IsWhiteSpace(nextChar))
+                        {
+                            binReader.ReadChar();
+                        }
+                        else
+                        {
+                            switch (headerItemCount)
+                            {
+                                case 0:
+                                    char[] chars = binReader.ReadChars(2);
+                                    this.header.MagicNumber = chars[0].ToString() + chars[1].ToString();
+                                    headerItemCount++;
+                                    break;
+                                case 1:
+                                    this.header.Width = ReadValue(binReader);
+                                    headerItemCount++;
+                                    break;
+                                case 2:
+                                    this.header.Height = ReadValue(binReader);
+                                    headerItemCount++;
+                                    break;
+                                case 3:
+                                    this.header.Depth = ReadValue(binReader);
+                                    headerItemCount++;
+                                    break;
+                                default:
+                                    throw new Exception("B³¹d parsowania nag³ówka.");
+                            }
                         }
                     }
-                }
 
-                switch (this.header.MagicNumber)
-                {
-
-                    case "P3":
-                    case "P6":  // 3 bytes per pixel
-                        this.pixelFormat = PixelFormat.Format24bppRgb;
-                        this.bytesPerPixel = 3;
-                        break;
-                    default:
-                        throw new Exception("Nieznany numer: " + this.header.MagicNumber);
-                }
-
-                this.imageData = new byte[this.header.Width * this.header.Height * this.bytesPerPixel];
-                this.stride = this.header.Width * this.bytesPerPixel;
-
-                if (this.header.MagicNumber == "P3") 
-                {
-                    int charsLeft = (int)(binReader.BaseStream.Length - binReader.BaseStream.Position);
-                    char[] charData = binReader.ReadChars(charsLeft);
-                    string valueString = string.Empty;
-                    index = 0;
-                    for (int i = 0; i < charData.Length; i++)
+                    switch (this.header.MagicNumber)
                     {
-                        if (Char.IsWhiteSpace(charData[i]))
+
+                        case "P3":
+                        case "P6":  // 3 bytes per pixel
+                            this.pixelFormat = PixelFormat.Format24bppRgb;
+                            this.bytesPerPixel = 3;
+                            break;
+                        default:
+                            throw new Exception("Nieznany numer: " + this.header.MagicNumber);
+                    }
+
+                    this.imageData = new byte[this.header.Width * this.header.Height * this.bytesPerPixel];
+                    this.stride = this.header.Width * this.bytesPerPixel;
+
+                    if (this.header.MagicNumber == "P3")
+                    {//tekstowo
+                        int charsLeft = (int)(binReader.BaseStream.Length - binReader.BaseStream.Position);
+                        char[] charData = binReader.ReadChars(CHUNK_SIZE);
+                        string valueString = string.Empty;
+                        index = 0;
+                        while (charData.Length > 0)
                         {
-                            if (valueString != string.Empty)
+
+
+                            for (int i = 0; i < charData.Length; i++)
                             {
-                                this.imageData[index] = (byte)int.Parse(valueString);
-                                valueString = string.Empty;
-                                index++;
+                                if (Char.IsWhiteSpace(charData[i]))
+                                {
+                                    if (valueString != string.Empty)
+                                    {
+                                        this.imageData[index] = (byte)((int.Parse(valueString) * 255) / this.header.Depth);
+                                        valueString = string.Empty;
+                                        index++;
+                                    }
+                                }
+                                else
+                                {
+                                    valueString += charData[i];
+                                }
+                            }
+                            charData = binReader.ReadChars(CHUNK_SIZE);
+                        }
+
+                    }
+                    else//binarnie
+                    {
+                        int bytesLeft = (int)(binReader.BaseStream.Length - binReader.BaseStream.Position);
+                        if (this.header.Depth > 256)
+                        {
+                            byte[] byteData = binReader.ReadBytes(CHUNK_SIZE);
+                            int idx = 0;
+                            while (byteData.Length > 0)
+                            {
+                                byte[] parsedData;
+
+                                parsedData = new byte[byteData.Length / 2];
+                                
+                                for (int i = 0; i < byteData.Length; i += 2)
+                                {
+                                    int value = (byteData[i] << 8) | byteData[i + 1];
+                                    this.imageData[idx] = (byte)((value * 255) / this.header.Depth);
+                                    idx++;
+                                }
+
+                                byteData = binReader.ReadBytes(CHUNK_SIZE);
                             }
                         }
                         else
                         {
-                            valueString += charData[i];
+                            //byte[] byteData = binReader.ReadBytes(CHUNK_SIZE);
+                            //int idx = 0;
+                            //while (byteData.Length > 0)
+                            //{
+                            //    for (int i = 0; i < byteData.Length; i++)
+                            //    {
+                            //        this.imageData[idx] = (byte)((byteData[i] * 255) / this.header.Depth);
+                            //        idx++;
+                            //    }
+
+                            //    byteData = binReader.ReadBytes(CHUNK_SIZE);
+                            //}
+                            this.imageData = binReader.ReadBytes(bytesLeft);
                         }
                     }
+                    ReorderBGRtoRGB();
+
+                    if (stride % 4 == 0)
+                    {
+                        this.bitmap = CreateBitMap();
+                    }
+                    else
+                        this.bitmap = CreateBitmapOffSize();
+
+                    this.bitmap.RotateFlip(RotateFlipType.Rotate180FlipNone);
                 }
-                else
+
+                // If the end of the stream is reached before reading all of the expected values raise an exception.
+                catch (EndOfStreamException e)
                 {
-                    int bytesLeft = (int)(binReader.BaseStream.Length - binReader.BaseStream.Position);
-                    this.imageData = binReader.ReadBytes(bytesLeft);
+                    Console.WriteLine(e.Message);
+                    throw new Exception("B³¹d czytania strumienia! Koniec strumienia! SprawdŸ czy dane obrazu s¹ w odpowiednim formacie!", e);
                 }
-                ReorderBGRtoRGB();
-
-                if (stride % 4 == 0)
+                catch (Exception ex)
                 {
-                    this.bitmap = CreateBitMap();
-                }else
-                    this.bitmap = CreateBitmapOffSize();
-
-                this.bitmap.RotateFlip(RotateFlipType.Rotate180FlipNone);
-            }
-
-            // If the end of the stream is reached before reading all of the expected values raise an exception.
-            catch (EndOfStreamException e)
-            {
-                Console.WriteLine(e.Message);
-                throw new Exception("B³¹d czytania strumienia! ", e);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw new Exception("B³¹d czytania strumienia! ", ex);
-            }
-            finally
-            {
-               binReader.Close();
+                    Console.WriteLine(ex.Message);
+                    throw new Exception("B³¹d czytania strumienia! SprawdŸ czy dane obrazu s¹ w odpowiednim formacie!", ex);
+                }
             }
         }
 
@@ -215,10 +259,10 @@ namespace PixelMap
             {
                 value += binReader.ReadChar().ToString();
             }
-            binReader.ReadByte();  
+            binReader.ReadByte();
             return int.Parse(value);
         }
-        
+
         private Bitmap CreateBitMap()
         {
             IntPtr pImageData = Marshal.AllocHGlobal(this.imageData.Length);
