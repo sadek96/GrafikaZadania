@@ -57,6 +57,7 @@
             this.kTrack = new System.Windows.Forms.TrackBar();
             this.yTrack = new System.Windows.Forms.TrackBar();
             this.mTrack = new System.Windows.Forms.TrackBar();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gTrack)).BeginInit();
@@ -73,6 +74,7 @@
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.button1);
             this.panel3.Controls.Add(this.colorPanel);
             this.panel3.Controls.Add(this.cmykToRgbButton);
             this.panel3.Controls.Add(this.rgbToCmykButton);
@@ -370,6 +372,16 @@
             this.mTrack.TabIndex = 1;
             this.mTrack.ValueChanged += new System.EventHandler(this.rgbTrackBar_ValueChanged);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(143, 480);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(88, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Kostka RGB";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // UserControl3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -427,5 +439,6 @@
         private System.Windows.Forms.Panel colorPanel;
         private System.Windows.Forms.Button showFromRGBButton;
         private System.Windows.Forms.Button showFromCMYKButton;
+        private System.Windows.Forms.Button button1;
     }
 }

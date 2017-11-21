@@ -37,10 +37,12 @@
             this.userControl11 = new GrafikaZadania.UserControl1();
             this.userControl21 = new GrafikaZadania.UserControl2();
             this.userControl31 = new GrafikaZadania.UserControl3();
+            this.userControl51 = new GrafikaZadania.UserControl5();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -100,6 +102,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.userControl51);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Size = new System.Drawing.Size(776, 535);
@@ -126,10 +129,19 @@
             // 
             // userControl31
             // 
+            this.userControl31.Dock = System.Windows.Forms.DockStyle.Fill;
             this.userControl31.Location = new System.Drawing.Point(0, 0);
             this.userControl31.Name = "userControl31";
-            this.userControl31.Size = new System.Drawing.Size(150, 150);
+            this.userControl31.Size = new System.Drawing.Size(776, 535);
             this.userControl31.TabIndex = 0;
+            // 
+            // userControl51
+            // 
+            this.userControl51.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControl51.Location = new System.Drawing.Point(0, 0);
+            this.userControl51.Name = "userControl51";
+            this.userControl51.Size = new System.Drawing.Size(776, 535);
+            this.userControl51.TabIndex = 0;
             // 
             // Form1
             // 
@@ -143,6 +155,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -158,6 +171,7 @@
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
         private UserControl3 userControl31;
+        private UserControl5 userControl51;
     }
 }
 
