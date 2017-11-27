@@ -31,13 +31,13 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.picBox = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.histogramButton = new System.Windows.Forms.Button();
+            this.operationButton = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.loadImageButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.operationButton = new System.Windows.Forms.Button();
-            this.histogramButton = new System.Windows.Forms.Button();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
             this.panel2.SuspendLayout();
@@ -83,6 +83,60 @@
             this.panel2.Size = new System.Drawing.Size(770, 48);
             this.panel2.TabIndex = 3;
             // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(274, 7);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(41, 20);
+            this.textBox1.TabIndex = 5;
+            this.textBox1.Visible = false;
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(321, 0);
+            this.trackBar1.Maximum = 255;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(193, 45);
+            this.trackBar1.TabIndex = 4;
+            this.trackBar1.Visible = false;
+            this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
+            // 
+            // histogramButton
+            // 
+            this.histogramButton.Location = new System.Drawing.Point(91, 7);
+            this.histogramButton.Name = "histogramButton";
+            this.histogramButton.Size = new System.Drawing.Size(105, 23);
+            this.histogramButton.TabIndex = 3;
+            this.histogramButton.Text = "Pokaż histogram";
+            this.histogramButton.UseVisualStyleBackColor = true;
+            this.histogramButton.Click += new System.EventHandler(this.histogramButton_Click);
+            // 
+            // operationButton
+            // 
+            this.operationButton.Location = new System.Drawing.Point(692, 7);
+            this.operationButton.Name = "operationButton";
+            this.operationButton.Size = new System.Drawing.Size(75, 23);
+            this.operationButton.TabIndex = 2;
+            this.operationButton.Text = "Aplikuj";
+            this.operationButton.UseVisualStyleBackColor = true;
+            this.operationButton.Click += new System.EventHandler(this.operationButton_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Rozszerzenie histogramu",
+            "Wyrównanie histogramu",
+            "Binaryzacja ręczny próg",
+            "Binaryzacja średnia"});
+            this.comboBox1.Location = new System.Drawing.Point(520, 7);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(166, 21);
+            this.comboBox1.TabIndex = 1;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // loadImageButton
             // 
             this.loadImageButton.AutoSize = true;
@@ -98,59 +152,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Rozszerzenie histogramu",
-            "Wyrównanie histogramu",
-            "Binaryzacja ręczny próg"});
-            this.comboBox1.Location = new System.Drawing.Point(520, 7);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(166, 21);
-            this.comboBox1.TabIndex = 1;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // operationButton
-            // 
-            this.operationButton.Location = new System.Drawing.Point(692, 7);
-            this.operationButton.Name = "operationButton";
-            this.operationButton.Size = new System.Drawing.Size(75, 23);
-            this.operationButton.TabIndex = 2;
-            this.operationButton.Text = "Aplikuj";
-            this.operationButton.UseVisualStyleBackColor = true;
-            this.operationButton.Click += new System.EventHandler(this.operationButton_Click);
-            // 
-            // histogramButton
-            // 
-            this.histogramButton.Location = new System.Drawing.Point(91, 7);
-            this.histogramButton.Name = "histogramButton";
-            this.histogramButton.Size = new System.Drawing.Size(105, 23);
-            this.histogramButton.TabIndex = 3;
-            this.histogramButton.Text = "Pokaż histogram";
-            this.histogramButton.UseVisualStyleBackColor = true;
-            this.histogramButton.Click += new System.EventHandler(this.histogramButton_Click);
-            // 
-            // trackBar1
-            // 
-            this.trackBar1.Location = new System.Drawing.Point(321, 0);
-            this.trackBar1.Maximum = 255;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(193, 45);
-            this.trackBar1.TabIndex = 4;
-            this.trackBar1.Visible = false;
-            this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(274, 7);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(41, 20);
-            this.textBox1.TabIndex = 5;
-            this.textBox1.Visible = false;
             // 
             // UserControl5
             // 

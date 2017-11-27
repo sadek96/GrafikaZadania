@@ -56,6 +56,11 @@ namespace GrafikaZadania
                     string msg = ex.Message;
                     MessageBox.Show(msg, "Błąd wczytywania pliku");
                 }
+                finally
+                {
+                    fileStream.Close();
+                }
+                processedBitmap = displayedBitmap;
 
                 picBox.Image = displayedBitmap;
             }
@@ -79,15 +84,19 @@ namespace GrafikaZadania
                         processedBitmap = BinarizationOperation.PBinary(displayedBitmap,trackBar1.Value);
                         picBox.Image = processedBitmap;
                         break;
+                    case 3:
+                        processedBitmap = BinarizationOperation.MeanThreshold(displayedBitmap);
+                        picBox.Image = processedBitmap;
+                        break;
                     default: break;
                 }
         }
 
         private void histogramButton_Click(object sender, EventArgs e)
         {
-            if (displayedBitmap != null)
+            if (processedBitmap != null)
             {
-                new HistogramForm(displayedBitmap).Show();
+                new HistogramForm(processedBitmap).Show();
             }
         }
 
