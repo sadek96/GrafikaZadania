@@ -30,19 +30,28 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.userControl11 = new GrafikaZadania.UserControl1();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.userControl21 = new GrafikaZadania.UserControl2();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.userControl31 = new GrafikaZadania.UserControl3();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.userControl11 = new GrafikaZadania.UserControl1();
-            this.userControl21 = new GrafikaZadania.UserControl2();
-            this.userControl31 = new GrafikaZadania.UserControl3();
             this.userControl51 = new GrafikaZadania.UserControl5();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.userControl61 = new GrafikaZadania.UserControl6();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.userControl81 = new GrafikaZadania.UserControl8();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.userControl91 = new GrafikaZadania.UserControl9();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            this.tabPage7.SuspendLayout();
+            this.tabPage8.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -52,6 +61,9 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
+            this.tabControl1.Controls.Add(this.tabPage7);
+            this.tabControl1.Controls.Add(this.tabPage8);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -70,6 +82,14 @@
             this.tabPage1.Text = "Zadanie 1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // userControl11
+            // 
+            this.userControl11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControl11.Location = new System.Drawing.Point(3, 3);
+            this.userControl11.Name = "userControl11";
+            this.userControl11.Size = new System.Drawing.Size(770, 529);
+            this.userControl11.TabIndex = 0;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.userControl21);
@@ -81,6 +101,15 @@
             this.tabPage2.Text = "Zadanie 2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // userControl21
+            // 
+            this.userControl21.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControl21.Location = new System.Drawing.Point(3, 3);
+            this.userControl21.Name = "userControl21";
+            this.userControl21.Padding = new System.Windows.Forms.Padding(10);
+            this.userControl21.Size = new System.Drawing.Size(770, 529);
+            this.userControl21.TabIndex = 0;
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.userControl31);
@@ -90,6 +119,14 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Zadanie 3";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // userControl31
+            // 
+            this.userControl31.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControl31.Location = new System.Drawing.Point(0, 0);
+            this.userControl31.Name = "userControl31";
+            this.userControl31.Size = new System.Drawing.Size(776, 535);
+            this.userControl31.TabIndex = 0;
             // 
             // tabPage4
             // 
@@ -110,31 +147,6 @@
             this.tabPage5.Text = "Zadanie 5";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // userControl11
-            // 
-            this.userControl11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControl11.Location = new System.Drawing.Point(3, 3);
-            this.userControl11.Name = "userControl11";
-            this.userControl11.Size = new System.Drawing.Size(770, 529);
-            this.userControl11.TabIndex = 0;
-            // 
-            // userControl21
-            // 
-            this.userControl21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControl21.Location = new System.Drawing.Point(3, 3);
-            this.userControl21.Name = "userControl21";
-            this.userControl21.Padding = new System.Windows.Forms.Padding(10);
-            this.userControl21.Size = new System.Drawing.Size(770, 529);
-            this.userControl21.TabIndex = 0;
-            // 
-            // userControl31
-            // 
-            this.userControl31.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControl31.Location = new System.Drawing.Point(0, 0);
-            this.userControl31.Name = "userControl31";
-            this.userControl31.Size = new System.Drawing.Size(776, 535);
-            this.userControl31.TabIndex = 0;
-            // 
             // userControl51
             // 
             this.userControl51.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -142,6 +154,60 @@
             this.userControl51.Name = "userControl51";
             this.userControl51.Size = new System.Drawing.Size(776, 535);
             this.userControl51.TabIndex = 0;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.userControl61);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Size = new System.Drawing.Size(776, 535);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "Zadanie 6";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // userControl61
+            // 
+            this.userControl61.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControl61.Location = new System.Drawing.Point(0, 0);
+            this.userControl61.Name = "userControl61";
+            this.userControl61.Size = new System.Drawing.Size(776, 535);
+            this.userControl61.TabIndex = 0;
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.userControl81);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Size = new System.Drawing.Size(776, 535);
+            this.tabPage7.TabIndex = 6;
+            this.tabPage7.Text = "Zadanie 8";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // userControl81
+            // 
+            this.userControl81.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControl81.Location = new System.Drawing.Point(0, 0);
+            this.userControl81.Name = "userControl81";
+            this.userControl81.Size = new System.Drawing.Size(776, 535);
+            this.userControl81.TabIndex = 0;
+            // 
+            // tabPage8
+            // 
+            this.tabPage8.Controls.Add(this.userControl91);
+            this.tabPage8.Location = new System.Drawing.Point(4, 22);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Size = new System.Drawing.Size(776, 535);
+            this.tabPage8.TabIndex = 7;
+            this.tabPage8.Text = "Zadanie 9";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // userControl91
+            // 
+            this.userControl91.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControl91.Location = new System.Drawing.Point(0, 0);
+            this.userControl91.Name = "userControl91";
+            this.userControl91.Size = new System.Drawing.Size(776, 535);
+            this.userControl91.TabIndex = 0;
             // 
             // Form1
             // 
@@ -156,6 +222,9 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage8.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -172,6 +241,12 @@
         private System.Windows.Forms.TabPage tabPage5;
         private UserControl3 userControl31;
         private UserControl5 userControl51;
+        private System.Windows.Forms.TabPage tabPage6;
+        private UserControl6 userControl61;
+        private System.Windows.Forms.TabPage tabPage7;
+        private UserControl8 userControl81;
+        private System.Windows.Forms.TabPage tabPage8;
+        private UserControl9 userControl91;
     }
 }
 
